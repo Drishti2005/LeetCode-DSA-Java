@@ -1,0 +1,52 @@
+import java.util.*;
+
+class Solution {
+    public List<List<String>> solveNQueens(int n) {
+        List<List<String>> result = new ArrayList<>();
+        char[][] board = new char[n][n];
+        for (char[] row : board) {
+            Arrays.fill(row, '.');
+        }
+        placeQueens(board, n, 0, result);
+        return result;
+    }
+
+    private void placeQueens(char[][] board, int tq, int row, List<List<String>> result) {
+        if (row == tq) {
+            result.add(constructBoard(board));
+            return;
+        }
+
+        for (int col = 0; col < board[0].length; col++) {
+            if (isValid(board, row, col)) {
+                board[row][col] = 'Q';
+                placeQueens(board, tq, row + 1, result);
+                board[row][col] = '.';
+            }
+        }
+    }
+
+    private boolean isValid(char[][] board, int row, int col) {
+        for (int r = 0; r < row; r++) {
+            if (board[r][col] == 'Q') return false;
+        }
+
+        for (int r = row - 1, c = col - 1; r >= 0 && c >= 0; r--, c--) {
+            if (board[r][c] == 'Q') return false;
+        }
+
+        for (int r = row - 1, c = col + 1; r >= 0 && c < board.length; r--, c++) {
+            if (board[r][c] == 'Q') return false;
+        }
+
+        return true;
+    }
+
+    private List<String> constructBoard(char[][] board) {
+        List<String> config = new ArrayList<>();
+        for (char[] row : board) {
+            config.add(new String(row));
+        }
+        return config;
+    }
+}
