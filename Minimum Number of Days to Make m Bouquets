@@ -1,0 +1,52 @@
+class Solution {
+    public int minDays(int[] nums, int m, int k) {
+        int tf = m * k;
+        if (nums.length < tf) {
+            return -1;
+        }
+
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+
+        
+        for (int i = 0; i < nums.length; i++) {
+            min = Math.min(min, nums[i]);
+            max = Math.max(max, nums[i]);
+        }
+
+        int ans = -1;
+        while (min <= max) {
+            int mid = min + (max - min) / 2;
+            if (canmakebouquet(nums, mid, m, k)) {
+                ans = mid;
+                max = mid - 1; 
+            } else {
+                min = mid + 1;
+            }
+        }
+        return ans;
+    }
+
+    private boolean canmakebouquet(int[] nums, int day, int m, int k) {
+        int c = 0; 
+        int b = 0; 
+
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] <= day) {
+                c++;
+                if (c == k) {
+                    b++;
+                    c = 0;
+                }
+            } else {
+                c = 0; 
+            }
+
+            if (b >= m) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
