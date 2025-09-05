@@ -1,0 +1,18 @@
+class Solution {
+    public int makeTheIntegerZero(int num1, int num2) {
+        int c=0;
+        for(int m=1;m<=60;m++){
+           long s = (long) num1 - (long) m * (long) num2;
+
+            if(s<0){
+                break;
+            }
+            if (s >= m && Long.bitCount(s) <= m) {
+                return m;
+            }
+
+        }
+        
+        return -1;
+    }
+}
