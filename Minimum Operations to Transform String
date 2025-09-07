@@ -1,0 +1,10 @@
+class Solution {
+    public int minOperations(String s) {
+        int mx=0;
+        for(char c:s.toCharArray()){
+            int si=(26-(c-'a'))%26;
+            mx=Math.max(mx,si);
+        }
+       return mx;
+    }
+}
