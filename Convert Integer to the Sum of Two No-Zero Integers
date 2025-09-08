@@ -1,0 +1,25 @@
+class Solution {
+    public int[] getNoZeroIntegers(int n) {
+        // ArrayList<Integer> ll=new ArrayList<>();
+        int[] ll=new int[2];
+        for(int i=1;i<n;i++){
+            int j=n-i;
+                if(no_zero(i) && no_zero(j)){
+                    ll[0]=i;
+                    ll[1]=j;
+                }
+            
+        }
+        return ll;
+    }
+    private boolean no_zero(int n){
+        while(n>0){
+            int a=n%10;
+            if(a==0){
+                return false;
+            }
+            n/=10;
+        }
+        return true;
+    }
+}
