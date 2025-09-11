@@ -1,0 +1,27 @@
+class Solution {
+    public String sortVowels(String s) {
+        List<Character> vowels = new ArrayList<>();
+        List<Integer> positions = new ArrayList<>();
+
+        
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' ||
+                c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U') {
+                vowels.add(c);
+                positions.add(i);
+            }
+        }
+
+       
+        Collections.sort(vowels);
+
+       
+        StringBuilder result = new StringBuilder(s);
+        for (int i = 0; i < positions.size(); i++) {
+            result.setCharAt(positions.get(i), vowels.get(i));
+        }
+
+        return result.toString();
+    }
+}
